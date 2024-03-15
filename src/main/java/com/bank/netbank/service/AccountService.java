@@ -7,6 +7,8 @@ import com.bank.netbank.model.CheckingAccount;
 import com.bank.netbank.model.SavingsAccount;
 import com.bank.netbank.repository.CheckingAccountRepository;
 import com.bank.netbank.repository.SavingsAccountRepository;
+import com.bank.netbank.service.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +35,18 @@ public class AccountService {
         entity.setInterestRate(dto.getInterestRate());
         savingsAccountRepository.save(entity);
         return new SavingsAccountDTO(entity);
+    }
+
+    @Transactional
+    public CheckingAccountDTO depositToCheckingAccount(CheckingAccountDTO dto) {
+
+        try {
+            CheckingAccount entity = checkingAccountRepository.getReferenceById(dto.getId());
+            entity.deposit(dto.getAmount());
+            return new CheckingAccountDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id not Found " + dto.getId());
+        }
+
     }
 }

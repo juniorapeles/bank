@@ -4,7 +4,9 @@ import com.bank.netbank.model.CheckingAccount;
 
 public class CheckingAccountDTO {
     private Long id;
-    private double overdraftLimit;
+    private Double overdraftLimit;
+
+    private Double amount;
 
     public CheckingAccountDTO() {
     }
@@ -34,5 +36,17 @@ public class CheckingAccountDTO {
 
     public void setOverdraftLimit(double overdraftLimit) {
         this.overdraftLimit = overdraftLimit;
+    }
+
+    public void setOverdraftLimit(Double overdraftLimit) {
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
     }
 }

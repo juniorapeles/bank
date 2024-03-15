@@ -31,6 +31,12 @@ public class AccountController {
         return ResponseEntity.created(uri).body(dto);
     }
 
+    @PostMapping("/checking/deposit")
+    public ResponseEntity<CheckingAccountDTO> depositToCheckingAccount(@RequestBody CheckingAccountDTO dto) {
+         dto = service.depositToCheckingAccount(dto);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping("/savings")
     public ResponseEntity<SavingsAccountDTO> createSavingsAccount(@RequestBody SavingsAccountDTO dto) {
         dto = service.createSavingsAccount(dto);
