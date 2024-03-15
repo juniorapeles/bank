@@ -1,1 +1,0 @@
-INSERT INTO  tb_custommer (name, cpf) VALUES ('junior', '9999999999')
